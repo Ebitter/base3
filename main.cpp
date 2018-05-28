@@ -6,6 +6,7 @@ std::mutex mutex;
 int source = 1;
 void task(const char *agr)
 {
+    std::chrono::milliseconds dura(10);
     for(;;)
     {
         mutex.lock();
@@ -16,6 +17,8 @@ void task(const char *agr)
         }
        std::cout  << agr << "  i=" << source++  << " thread ID=" << std::this_thread::get_id() << std::endl;
        mutex.unlock();
+
+       std::this_thread::sleep_for(dura);
     }
 }
 
